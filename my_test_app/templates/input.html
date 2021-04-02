@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.js"
+            integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+</head>
+<body>
+<div id="input_form">
+    <form method="POST" action="{% url 'input' %}">
+        {% csrf_token %}
+        <div class="input">
+            <input type="text" class="name" name="name" placeholder="Input name"><br>
+        </div>
+        <button type="submit">Send</button>
+    </form>
+    <div id="add-button">
+        <input type="button" id="add" value="Add">
+    </div>
+</div>
+
+<script>
+    $(document).ready(function () {
+        let x = 2;
+        $('#add').click(function (e) {
+            e.preventDefault()
+            let clone = $(".name:last").clone(true).attr({
+                "name": "name" + x,
+                "placeholder": "Input name" + x,
+            });
+            clone.val('')
+            $('.input').append(clone).append('<br>');
+            x++;
+        });
+    });
+</script>
+<style>
+    #input_form {
+        display: flex;
+        flex-direction: row;
+    }
+</style>
+</body>
+</html>
+
